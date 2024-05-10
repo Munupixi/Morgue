@@ -1,0 +1,45 @@
+﻿<Page x:Class="Morgue.ViewPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Morgue"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="ViewPage">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <TextBox x:Name="SearchTextBox" HorizontalAlignment="Left" TextWrapping="Wrap" Width="120" TextChanged="SearchTextBox_TextChanged"/>
+        <Label Content="Просмотр заявок" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16"/>
+        <Button x:Name="CreateButton" Content="Создать заявку" HorizontalAlignment="Right" Click="CreateButton_Click"/>
+        <DataGrid x:Name="MainDataGrid" Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id заявки" Binding="{Binding Path=RequestId}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Статус" Binding="{Binding Path=Status.Title}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Исполнитель" Binding="{Binding Path=ExecutorId}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Дата создания" Binding="{Binding Path=CreationDate}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Название" Binding="{Binding Path=Title}"></DataGridTextColumn>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button x:Name="EditButton" Click="EditButton_Click">Изменить</Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="120,4,0,0" VerticalAlignment="Top">
+            <Label Content="Выдано:"/>
+            <Label x:Name="ViewRequestsCountLabel"/>
+            <Label Content="из:"/>
+            <Label x:Name="RequestsCountLabel"/>
+        </StackPanel>
+        <Button x:Name="ResetButton" Content="Очистить" Margin="0,0,91,0" Click="ResetButton_Click" HorizontalAlignment="Right" Width="54"/>
+        <ComboBox x:Name="StatusComboBox" Margin="0,0,150,0" HorizontalAlignment="Right" Width="120" SelectionChanged="StatusComboBox_SelectionChanged"/>
+
+    </Grid>
+</Page>
